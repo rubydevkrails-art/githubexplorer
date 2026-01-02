@@ -10,7 +10,7 @@ puts "=== GitHub Explorer v#{GitHubExplorer::VERSION} ===".green
 
 # 2. Simple UI Logic
 puts "=============================="
-puts "   GITHUB USER EXPLORER CLI   "
+puts "   GITHUB USER EXPLORER CLI Tool  "
 puts "=============================="
 
 print "Enter a GitHub username: "
