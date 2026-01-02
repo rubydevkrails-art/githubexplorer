@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# The line above is a "Shebang" - it tells your computer to use Ruby to run this file.
+
+# 1. Load dependencies and your library files
+require 'bundler/setup' # Ensures gems from Gemfile are used
+require 'dotenv/load'   # Loads your GITHUB_TOKEN from .env
+require_relative '../lib/github_explorer'
+
+puts "=== GitHub Explorer v#{GitHubExplorer::VERSION} ===".green
+
+# 2. Simple UI Logic
+puts "=============================="
+puts "   GITHUB USER EXPLORER CLI   "
+puts "=============================="
+
+print "Enter a GitHub username: "
+username = gets.chomp
+
+# 3. Use your classes
+token = ENV['GITHUB_TOKEN']
+client = GitHubExplorer::Client.new(token)
+
+puts "\nSearching for #{username}..."
+
+begin
+  user = client.fetch_user(username)
+
+  if user
+    puts "\n" + user.profile_summary
+  else
+    puts "Error: User '#{username}' was not found."
+  end
+rescue StandardError => e
+  puts "An unexpected error occurred: #{e.message}"
+end
+
+puts "\nThank you for using Explorer!"
